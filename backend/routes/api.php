@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AppealController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ExamController;
 use App\Http\Controllers\Api\ExamPaperController;
@@ -51,5 +52,14 @@ Route::middleware(['api', 'auth:sanctum', 'throttle:60,1'])->group(function () {
         Route::get('/statistics', [ScoreController::class, 'statistics']);
         Route::get('/ranking/{examPaper}', [ScoreController::class, 'ranking']);
         Route::get('/analysis/{examPaper}', [ScoreController::class, 'analysis']);
+    });
+
+    Route::prefix('appeals')->group(function () {
+        Route::get('/', [AppealController::class, 'index']);
+        Route::post('/', [AppealController::class, 'store']);
+        Route::get('/my', [AppealController::class, 'myAppeals']);
+        Route::get('/{appeal}', [AppealController::class, 'show']);
+        Route::post('/{appeal}/review', [AppealController::class, 'review']);
+        Route::get('/{appeal}/evidence', [AppealController::class, 'evidence']);
     });
 });

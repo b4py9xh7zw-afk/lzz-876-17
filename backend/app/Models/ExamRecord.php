@@ -51,4 +51,9 @@ class ExamRecord extends Model
     {
         return $this->hasMany(ExamRecordAnswer::class, 'exam_record_id');
     }
+
+    public function appeals()
+    {
+        return $this->hasMany(Appeal::class, 'exam_record_id');
+    }
 }

@@ -158,7 +158,7 @@ class ExamController extends Controller
 
     public function myRecords(Request $request)
     {
-        $records = ExamRecord::with('examPaper')
+        $records = ExamRecord::with(['examPaper', 'appeals'])
             ->where('user_id', $request->user()->id)
             ->orderBy('id', 'desc')
             ->paginate($perPage = $request->input('per_page', 15));
